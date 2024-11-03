@@ -28,7 +28,7 @@ git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps && mkdir -p build && cd build && meson ..
 
 
-ninja
+./ninja
 #sudo ninja install
 cd ../..
 
