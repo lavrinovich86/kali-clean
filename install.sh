@@ -60,5 +60,5 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 git clone https://github.com/Dewalt-arch/pimpmykali.git
 cd pimpmykali
-sudo ./pimpmykali.sh
+#sudo ./pimpmykali.sh
 
