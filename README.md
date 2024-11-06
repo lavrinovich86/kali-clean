@@ -15,6 +15,8 @@ After cloning the repo just run ./install.sh from a non-root user. This updates 
 ## Installation
 
 ```
+git clone https://github.com/lavrinovich86/kali-clean.git
+cd kali-clean
 ./install.sh
 ```
 
