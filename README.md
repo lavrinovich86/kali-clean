@@ -6,7 +6,8 @@ My kali i3 desktop setup fork from xct with additions and some personal tweaks/c
 
 
 Updated Alacritty 0.13.2-2+b3
-Add feroxbuster, batcat, Sublime-Editor, seclists, mc, htop.
+
+Added feroxbuster, batcat, Sublime-Editor, seclists, mc, htop.
 
 Unzip rockyou password list.
 
