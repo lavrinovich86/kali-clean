@@ -1,8 +1,12 @@
 #!/bin/bash
 
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
 
-sudo apt-get install -y wget curl git thunar htop mc feroxbuster kali-desktop-i3-gaps
+sudo apt-get install -y wget curl git thunar htop mc feroxbuster kali-desktop-i3-gaps batcat apt-transport-https sublime-text
 #meson ninja-build pkg-config
 sudo apt-get install -y arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm lxappearance python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick
 sudo apt-get install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
