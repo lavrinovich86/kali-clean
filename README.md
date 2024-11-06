@@ -1,6 +1,6 @@
 # Kali-Clean
 
-My kali i3 desktop setup fork from XTC with additions and some personal tweaks/changes. 
+My kali i3 desktop setup fork from xct with additions and some personal tweaks/changes. 
 
 ![image](https://i.imgur.com/0XylhG4.jpeg)
 
