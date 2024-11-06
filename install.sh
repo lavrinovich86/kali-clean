@@ -3,11 +3,8 @@
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
-
 sudo apt-get install -y wget curl git thunar htop mc feroxbuster kali-desktop-i3-gaps bat apt-transport-https sublime-text seclists kali-wallpapers-legacy kali-linux-default
-#meson ninja-build pkg-config
 sudo apt-get install -y arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm lxappearance python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick
 sudo apt-get install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
 sudo apt-get install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
@@ -22,26 +19,10 @@ unzip RobotoMono.zip -d ~/.local/share/fonts/
 
 fc-cache -fv
 
-#wget https://github.com/barnumbirr/alacritty-debian/releases/download/v0.10.0-rc4-1/alacritty_0.10.0-rc4-1_amd64_bullseye.deb
-#sudo dpkg -i alacritty_0.10.0-rc4-1_amd64_bullseye.deb
-#sudo apt install -f
 #https://github.com/alacritty/alacritty-theme
 wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
 sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
 sudo apt install -f
-
-#wget https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip
-#unzip ninja-linux.zip
-
-#git clone https://www.github.com/Airblader/i3 i3-gaps
-#cd i3-gaps && mkdir -p build && cd build && meson ..
-
-
-#./ninja
-#sudo ninja install
-#cd ../..
-
-#pip3 install pywal
 
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/compton
