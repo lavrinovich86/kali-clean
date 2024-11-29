@@ -61,3 +61,7 @@ white = "#8a8a8a"
 [scrolling]
 history = 10000
 multiplier = 3
+
+[cursor]
+shape = "Underline"
+blinking = "Always"
