@@ -62,6 +62,11 @@ white = "#8a8a8a"
 history = 10000
 multiplier = 3
 
+[selection]
+save_to_clipboard = true
+
 [cursor]
-shape = "Underline"
-blinking = "Always"
+style = { shape = "Underline", blinking = "On" }
+unfocused_hollow = true
+thickness = 0.40
+blink_interval = 550

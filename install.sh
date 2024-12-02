@@ -91,7 +91,7 @@ mkdir /tmp/files; cd /tmp; wget https://eternallybored.org/misc/netcat/netcat-wi
 unzip netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/files/nc* /opt/nc/; sudo cp /usr/bin/nc /opt/nc/nc; cd ~;
 
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
-sudo apt install ./imhex-*.deb
+sudo apt install ./imhex-*.deb -y
 
 #https://github.com/calebstewart/pwncat?tab=readme-ov-file
 #https://pwncat.org/
