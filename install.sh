@@ -46,6 +46,11 @@ wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2
 sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
 sudo apt install -f
 
+
+mkdir -p ~/.config/alacritty/themes
+
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/compton
 mkdir -p ~/.config/rofi
@@ -63,6 +68,9 @@ echo "Done! Grab some wallpaper and run pywal -i filename to set your color sche
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
 # Rockyou extract
 cd /usr/share/wordlists;
