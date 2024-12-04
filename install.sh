@@ -1,16 +1,16 @@
 #!/bin/bash
 
-echo -e "\e[41mKali I3 Install\e[0m"
-echo -e "\e[41mBased off xct/clean\e[0m"
-echo -e "\e[41m  \e[24m"
-echo ""
+#
 
 # Give current user sudo nopasswd, no time for sudo while hacking!
 #echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 
 # add sublime-texteditor repositories
+#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
+#echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 sudo tee apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmina
@@ -30,17 +30,10 @@ sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks
 
 
 # Install Visual Code
-echo -e "\e[41m  Install Visual Code \e[24m"
 wget -O vscode.deb "https://go.microsoft.com/fwlink/?LinkID=760868"
 sudo dpkg -i vscode.deb
 rm vscode.deb
 
-echo -e "\e[41m  Remove CrackMapExec and install latest! \e[24m"
-sudo apt -y remove crackmapexec
-sudo mkdir /opt/CrackMapExec
-git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
-cd /opt/CrackMapExec
-pipx install . --force
 
 # Fonsts install
 mkdir -p ~/.local/share/fonts/
@@ -49,7 +42,7 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/RobotoMono
 unzip Iosevka.zip -d ~/.local/share/fonts/
 unzip RobotoMono.zip -d ~/.local/share/fonts/
 
-fc-cache -fv
+fc-cache -rfv
 
 #https://github.com/alacritty/alacritty-theme
 wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
@@ -58,7 +51,6 @@ sudo apt install -f
 
 
 mkdir -p ~/.config/alacritty/themes
-
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
 mkdir -p ~/.config/i3
@@ -108,7 +100,17 @@ sudo apt install ./imhex-*.deb -y
 apt install pwncat
 
 wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-sudo apt install ./rustscan_*.deb -y
+sudo dpkg -i ./rustscan_*.deb -y
+
+
+sudo apt -y remove crackmapexec
+sudo mkdir /opt/CrackMapExec
+git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
+cd /opt/CrackMapExec
+pipx install . --force
+cd ~
+
+
 
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
