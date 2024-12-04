@@ -1,2 +1,3 @@
 #!/bin/sh
 feh --no-fehbg --bg-fill ~/.wallpaper/23.jpg
+#feh --no-fehbg --bg-fill ~/.wallpaper/kali.jpg

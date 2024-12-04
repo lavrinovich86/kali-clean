@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo -e "\e[41mKali I3 Install\e[0m"
+echo -e "\e[41mBased off xct/clean\e[0m"
+echo -e "\e[41m  \e[24m"
+echo ""
+
 # Give current user sudo nopasswd, no time for sudo while hacking!
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 
@@ -7,27 +12,32 @@ echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
+sudo tee apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmina
 #Sublime text-editor
 sudo apt install -y apt-transport-https sublime-text sublime-merge 
 #wordlists 
 sudo apt install -y seclists wordlists
-sudo apt install -y kali-wallpapers-all kali-linux-default
+#sudo apt install -y kali-wallpapers-all kali-linux-default
 sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks i3status i3 i3-wm lxappearance python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick
-sudo apt install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
-sudo apt install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
+#sudo apt install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
+#sudo apt install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
 
-sudo apt install -y odat
-sudo apt install -y havoc
+# Oracle Database Attacking Tool
+#sudo apt install -y odat
+# Havoc C&C
+#sudo apt install -y havoc
 
 
 # Install Visual Code
+echo -e "\e[41m  Install Visual Code \e[24m"
 wget -O vscode.deb "https://go.microsoft.com/fwlink/?LinkID=760868"
 sudo dpkg -i vscode.deb
 rm vscode.deb
 
+echo -e "\e[41m  Remove CrackMapExec and install latest! \e[24m"
 sudo apt -y remove crackmapexec
+sudo mkdir /opt/CrackMapExec
 git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
 cd /opt/CrackMapExec
 pipx install . --force
@@ -61,11 +71,11 @@ cp .config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 cp .config/compton/compton.conf ~/.config/compton/compton.conf
 cp .config/rofi/config ~/.config/rofi/config
 cp .fehbg ~/.fehbg
+cp rustscan.toml ~/rustscan.toml
 cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp -r .wallpaper ~/.wallpaper 
 
-echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
-echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
+
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-completions
@@ -96,3 +106,9 @@ sudo apt install ./imhex-*.deb -y
 #https://github.com/calebstewart/pwncat?tab=readme-ov-file
 #https://pwncat.org/
 apt install pwncat
+
+wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
+sudo apt install ./rustscan_*.deb -y
+
+echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
+echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
