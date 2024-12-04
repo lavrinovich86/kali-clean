@@ -6,7 +6,7 @@ echo -e "\e[41m  \e[24m"
 echo ""
 
 # Give current user sudo nopasswd, no time for sudo while hacking!
-echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
+#echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 
 # add sublime-texteditor repositories
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
