@@ -1,8 +1,5 @@
 #!/bin/bash
-
-#
-
-# Give current user sudo nopasswd, no time for sudo while hacking!
+#Give current user sudo nopasswd, no time for sudo while hacking!
 #echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 
 # add sublime-texteditor repositories
@@ -18,7 +15,7 @@ sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmin
 sudo apt install -y apt-transport-https sublime-text sublime-merge 
 #wordlists 
 sudo apt install -y seclists wordlists
-#sudo apt install -y kali-wallpapers-all kali-linux-default
+sudo apt install -y kali-wallpapers-all kali-linux-default
 sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks i3status i3 i3-wm lxappearance python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick
 #sudo apt install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
 #sudo apt install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
@@ -39,8 +36,9 @@ rm vscode.deb
 mkdir -p ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/RobotoMono.zip
-unzip Iosevka.zip -d ~/.local/share/fonts/
-unzip RobotoMono.zip -d ~/.local/share/fonts/
+unzip -o Iosevka.zip -d ~/.local/share/fonts/
+unzip -o RobotoMono.zip -d ~/.local/share/fonts/
+rm Iosevka.zip RobotoMono.zip
 
 fc-cache -rfv
 
@@ -56,9 +54,10 @@ git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/theme
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/compton
 mkdir -p ~/.config/rofi
-mkdir -p ~/.config/alacritty
+#mkdir -p ~/.config/alacritty
+cd ~
 cp .config/i3/config ~/.config/i3/config
-cp .config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+cp .config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 cp .config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 cp .config/compton/compton.conf ~/.config/compton/compton.conf
 cp .config/rofi/config ~/.config/rofi/config
@@ -76,7 +75,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 
 # Rockyou extract
 cd /usr/share/wordlists;
-sudo gzip -d /usr/share/wordlists/rockyou.txt.gz; cd ~
+sudo gzip -d /usr/share/wordlists/rockyou.txt.gz; 
+cd ~
 
 #git clone https://github.com/Dewalt-arch/pimpmykali.git
 #cd pimpmykali
@@ -85,22 +85,22 @@ sudo gzip -d /usr/share/wordlists/rockyou.txt.gz; cd ~
 
 #Windows tools
 # psexec
-sudo mkdir /opt/psexec/; cd /opt/psexec/; sudo wget https://download.sysinternals.com/files/PSTools.zip; sudo unzip PSTools.zip; sudo rm PSTools.zip; cd ~;
+sudo mkdir /opt/psexec/; cd /opt/psexec/; sudo wget https://download.sysinternals.com/files/PSTools.zip; sudo unzip -o PSTools.zip; sudo rm PSTools.zip; cd ~;
 # accesschk
-sudo mkdir /opt/accesschk; cd /opt/accesschk; sudo wget https://download.sysinternals.com/files/AccessChk.zip; sudo unzip AccessChk.zip; sudo rm AccessChk.zip; cd ~;
+sudo mkdir /opt/accesschk; cd /opt/accesschk; sudo wget https://download.sysinternals.com/files/AccessChk.zip; sudo unzip -o AccessChk.zip; sudo rm AccessChk.zip; cd ~;
 #NC
 mkdir /tmp/files; cd /tmp; wget https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip; 
-unzip netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/files/nc* /opt/nc/; sudo cp /usr/bin/nc /opt/nc/nc; cd ~;
+unzip -o netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/files/nc* /opt/nc/; sudo cp /usr/bin/nc /opt/nc/nc; cd ~;
 
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
-sudo apt install ./imhex-*.deb -y
+sudo apt install ./imhex-*.deb
 
 #https://github.com/calebstewart/pwncat?tab=readme-ov-file
 #https://pwncat.org/
 apt install pwncat
 
 wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-sudo dpkg -i ./rustscan_*.deb -y
+sudo dpkg -i ./rustscan_*.deb
 
 
 sudo apt -y remove crackmapexec
@@ -108,6 +108,7 @@ sudo mkdir /opt/CrackMapExec
 git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
 cd /opt/CrackMapExec
 pipx install . --force
+pipx ensurepath
 cd ~
 
 
