@@ -67,11 +67,11 @@ git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/
 
 
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
-sudo apt install ./imhex-*.deb
+sudo apt install ./imhex-*.deb -y
 
 #https://github.com/calebstewart/pwncat?tab=readme-ov-file
 #https://pwncat.org/
-apt install pwncat
+sudo apt install pwncat
 
 wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb || exit 1
 sudo dpkg -i ./rustscan_2.3.0_amd64.deb
@@ -98,7 +98,7 @@ unzip -o netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/
 
 sudo apt -y remove crackmapexec
 sudo mkdir /opt/CrackMapExec
-git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
+sudo git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
 cd /opt/CrackMapExec
 pipx install . --force
 pipx ensurepath
@@ -114,7 +114,7 @@ git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
-
+./.fehbg
 
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
