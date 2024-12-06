@@ -4,8 +4,6 @@
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-#sudo echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmina
@@ -45,17 +43,13 @@ wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2
 sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
 #sudo apt install -f
 
-mkdir -p ~/.config/alacritty
-mkdir -p ~/.config/alacritty/themes
+mkdir -p ~/.config/alacritty ~/.config/i3 ~/.config/compton ~/.config/rofi
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
-mkdir -p ~/.config/i3
-mkdir -p ~/.config/compton
-mkdir -p ~/.config/rofi
-#mkdir -p ~/.config/alacritty
-#cd ~/home/kali/kali-clean
+
 cp .config/i3/config ~/.config/i3/config
 cp .config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+#cp .config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 cp .config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 cp .config/compton/compton.conf ~/.config/compton/compton.conf
 cp .config/rofi/config ~/.config/rofi/config
@@ -78,8 +72,8 @@ sudo apt install ./imhex-*.deb
 #https://pwncat.org/
 apt install pwncat
 
-wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-sudo dpkg -i ./rustscan_*.deb
+wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb || exit 1
+sudo dpkg -i ./rustscan_2.3.0_amd64.deb
 
 
 #git clone https://github.com/Dewalt-arch/pimpmykali.git
@@ -89,11 +83,14 @@ sudo dpkg -i ./rustscan_*.deb
 
 #Windows tools
 # psexec
-sudo mkdir /opt/psexec/; cd /opt/psexec/; sudo wget https://download.sysinternals.com/files/PSTools.zip; sudo unzip -o PSTools.zip; sudo rm PSTools.zip; cd ~;
+sudo mkdir /opt/psexec/ 
+cd /opt/psexec/; sudo wget https://download.sysinternals.com/files/PSTools.zip; sudo unzip -o PSTools.zip; sudo rm PSTools.zip; cd ~;
 # accesschk
-sudo mkdir /opt/accesschk; cd /opt/accesschk; sudo wget https://download.sysinternals.com/files/AccessChk.zip; sudo unzip -o AccessChk.zip; sudo rm AccessChk.zip; cd ~;
+sudo mkdir /opt/accesschk 
+cd /opt/accesschk; sudo wget https://download.sysinternals.com/files/AccessChk.zip; sudo unzip -o AccessChk.zip; sudo rm AccessChk.zip; cd ~;
 #NC
-mkdir /tmp/files; cd /tmp; wget https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip; 
+mkdir /tmp/files 
+cd /tmp; wget https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip; 
 unzip -o netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/files/nc* /opt/nc/; sudo cp /usr/bin/nc /opt/nc/nc; cd ~;
 
 
