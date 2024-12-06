@@ -1,6 +1,9 @@
 # Minimal Dark Mode Configuration for Alacritty
 
 import = []
+#import = [
+ #   "~/.config/alacritty/themes/themes/{theme}.toml"
+#]
 
 [shell]
 program = "/bin/zsh"

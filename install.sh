@@ -26,6 +26,14 @@ sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks
 wget -O vscode.deb "https://go.microsoft.com/fwlink/?LinkID=760868"
 sudo dpkg -i vscode.deb
 rm vscode.deb
+# Preconfigure debconf to auto-accept repository addition
+echo "debconf debconf/frontend select Noninteractive" | sudo debconf-set-selections
+
+# Suppress prompts during the package installation
+sudo DEBIAN_FRONTEND=noninteractive dpkg -i vscode.deb
+
+# Fix any dependency issues automatically
+sudo apt-get -f install -y
 
 
 # Fonsts install
@@ -41,12 +49,10 @@ fc-cache -fv
 #https://github.com/alacritty/alacritty-theme
 wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
 sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
-#sudo apt install -f
+sudo apt-get -f install -y
+rm alacritty_0.13.2-2+b3_amd64.deb
 
-mkdir -p ~/.config/alacritty ~/.config/i3 ~/.config/compton ~/.config/rofi
-git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-
-
+mkdir -p ~/.config/i3 ~/.config/compton ~/.config/rofi
 cp .config/i3/config ~/.config/i3/config
 cp .config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 #cp .config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
@@ -57,13 +63,8 @@ cp .fehbg ~/.fehbg
 cp rustscan.toml ~/rustscan.toml
 cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp -r .wallpaper ~/.wallpaper 
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/
 
-
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
 sudo apt install ./imhex-*.deb
@@ -107,6 +108,12 @@ cd ~
 cd /usr/share/wordlists
 sudo gzip -d /usr/share/wordlists/rockyou.txt.gz 
 cd ~
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+
 
 
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
