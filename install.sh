@@ -1,13 +1,11 @@
 #!/bin/bash
-#Give current user sudo nopasswd, no time for sudo while hacking!
-#echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
 
-# add sublime-texteditor repositories
-#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-#echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-
+#add sublime-texteditor repositories
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-sudo echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
+#sudo echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmina
@@ -40,14 +38,14 @@ unzip -o Iosevka.zip -d ~/.local/share/fonts/
 unzip -o RobotoMono.zip -d ~/.local/share/fonts/
 rm Iosevka.zip RobotoMono.zip
 
-fc-cache -rfv
+fc-cache -fv
 
 #https://github.com/alacritty/alacritty-theme
 wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
 sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
-sudo apt install -f
+#sudo apt install -f
 
-
+mkdir -p ~/.config/alacritty
 mkdir -p ~/.config/alacritty/themes
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
@@ -55,7 +53,7 @@ mkdir -p ~/.config/i3
 mkdir -p ~/.config/compton
 mkdir -p ~/.config/rofi
 #mkdir -p ~/.config/alacritty
-cd ~
+#cd ~/home/kali/kali-clean
 cp .config/i3/config ~/.config/i3/config
 cp .config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 cp .config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
@@ -73,10 +71,16 @@ git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/plugins/zsh-
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
-# Rockyou extract
-cd /usr/share/wordlists;
-sudo gzip -d /usr/share/wordlists/rockyou.txt.gz; 
-cd ~
+wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
+sudo apt install ./imhex-*.deb
+
+#https://github.com/calebstewart/pwncat?tab=readme-ov-file
+#https://pwncat.org/
+apt install pwncat
+
+wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
+sudo dpkg -i ./rustscan_*.deb
+
 
 #git clone https://github.com/Dewalt-arch/pimpmykali.git
 #cd pimpmykali
@@ -92,15 +96,6 @@ sudo mkdir /opt/accesschk; cd /opt/accesschk; sudo wget https://download.sysinte
 mkdir /tmp/files; cd /tmp; wget https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip; 
 unzip -o netcat-win32-1.12.zip -d /tmp/files/; sudo mkdir /opt/nc; sudo cp /tmp/files/nc* /opt/nc/; sudo cp /usr/bin/nc /opt/nc/nc; cd ~;
 
-wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
-sudo apt install ./imhex-*.deb
-
-#https://github.com/calebstewart/pwncat?tab=readme-ov-file
-#https://pwncat.org/
-apt install pwncat
-
-wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-sudo dpkg -i ./rustscan_*.deb
 
 
 sudo apt -y remove crackmapexec
@@ -111,6 +106,10 @@ pipx install . --force
 pipx ensurepath
 cd ~
 
+# Rockyou extract
+cd /usr/share/wordlists
+sudo gzip -d /usr/share/wordlists/rockyou.txt.gz 
+cd ~
 
 
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
