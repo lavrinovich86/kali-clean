@@ -52,7 +52,7 @@ sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
 sudo apt-get -f install -y
 rm alacritty_0.13.2-2+b3_amd64.deb
 
-mkdir -p ~/.config/i3 ~/.config/compton ~/.config/rofi
+mkdir -p ~/.config/alacritty ~/.config/i3 ~/.config/compton ~/.config/rofi
 cp .config/i3/config ~/.config/i3/config
 cp .config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 #cp .config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
@@ -63,7 +63,11 @@ cp .fehbg ~/.fehbg
 cp rustscan.toml ~/rustscan.toml
 cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp -r .wallpaper ~/.wallpaper 
-git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/
+#git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/
+
+git clone https://github.com/alacritty/alacritty-theme /tmp/alacritty-theme
+cp -r /tmp/alacritty-theme/* ~/.config/alacritty/
+rm -rf /tmp/alacritty-theme
 
 
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
