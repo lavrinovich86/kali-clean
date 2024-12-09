@@ -11,7 +11,7 @@ sudo apt-get install -y wget curl git thunar htop mc feroxbuster bat tree remmin
 sudo apt install -y apt-transport-https sublime-text sublime-merge 
 #wordlists 
 sudo apt install -y seclists wordlists
-sudo apt install -y kali-wallpapers-all kali-linux-default
+#sudo apt install -y kali-wallpapers-all kali-linux-default
 sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks i3status i3 i3-wm lxappearance python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick
 #sudo apt install -y libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson
 #sudo apt install -y libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev 
@@ -20,6 +20,9 @@ sudo apt install -y arandr flameshot arc-theme feh kali-desktop-i3-gaps i3blocks
 #sudo apt install -y odat
 # Havoc C&C
 #sudo apt install -y havoc
+#https://github.com/calebstewart/pwncat?tab=readme-ov-file
+#https://pwncat.org/
+sudo apt install pwncat
 
 
 # Install Visual Code
@@ -46,11 +49,7 @@ rm Iosevka.zip RobotoMono.zip
 
 fc-cache -fv
 
-#https://github.com/alacritty/alacritty-theme
-wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
-sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
-sudo apt-get -f install -y
-rm alacritty_0.13.2-2+b3_amd64.deb
+
 
 mkdir -p ~/.config/alacritty ~/.config/i3 ~/.config/compton ~/.config/rofi
 cp .config/i3/config ~/.config/i3/config
@@ -65,6 +64,12 @@ cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp -r .wallpaper ~/.wallpaper 
 #git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/
 
+#https://github.com/alacritty/alacritty-theme
+wget http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
+sudo dpkg -i alacritty_0.13.2-2+b3_amd64.deb
+sudo apt-get -f install -y
+rm alacritty_0.13.2-2+b3_amd64.deb
+
 git clone https://github.com/alacritty/alacritty-theme /tmp/alacritty-theme
 cp -r /tmp/alacritty-theme/* ~/.config/alacritty/
 rm -rf /tmp/alacritty-theme
@@ -73,9 +78,7 @@ rm -rf /tmp/alacritty-theme
 wget https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
 sudo apt install ./imhex-*.deb -y
 
-#https://github.com/calebstewart/pwncat?tab=readme-ov-file
-#https://pwncat.org/
-sudo apt install pwncat
+
 
 wget https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb || exit 1
 sudo dpkg -i ./rustscan_2.3.0_amd64.deb
