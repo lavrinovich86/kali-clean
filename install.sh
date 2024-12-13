@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Set frontend to noninteractive
-export DEBIAN_FRONTEND=noninteractive
-
 # Define the target user directory
 USER_HOME="/home/kali"
 
@@ -23,6 +20,17 @@ cp .fehbg "$USER_HOME/"
 cp rustscan.toml "$USER_HOME/"
 cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
+
+# Install Zsh and plugins
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ZSH_PLUGINS=(
+    "https://github.com/zsh-users/zsh-completions"
+    "https://github.com/zsh-users/zsh-autosuggestions"
+    "https://github.com/zsh-users/zsh-syntax-highlighting"
+)
+for plugin in "${ZSH_PLUGINS[@]}"; do
+    git clone "$plugin" ~/.oh-my-zsh/plugins/$(basename "$plugin")
+done
 
 # Set appropriate ownership if running as root
 if [ "$(id -u)" -eq 0 ]; then
