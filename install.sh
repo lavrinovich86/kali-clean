@@ -17,25 +17,12 @@ cp .config/i3/i3blocks.conf "$USER_HOME/.config/i3/"
 cp .config/compton/compton.conf "$USER_HOME/.config/compton/"
 cp .config/rofi/config "$USER_HOME/.config/rofi/"
 cp .fehbg "$USER_HOME/"
-cp rustscan.toml "$USER_HOME/"
+cp rustscan.toml "$USER_HOME/rustscan.toml"
 cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
+cp feroxbuster/ferox-config.toml "$USER_HOME/feroxbuster/ferox-config.toml"
 
-# Install Zsh and plugins
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ZSH_PLUGINS=(
-    "https://github.com/zsh-users/zsh-completions"
-    "https://github.com/zsh-users/zsh-autosuggestions"
-    "https://github.com/zsh-users/zsh-syntax-highlighting"
-)
-for plugin in "${ZSH_PLUGINS[@]}"; do
-    git clone "$plugin" ~/.oh-my-zsh/plugins/$(basename "$plugin")
-done
 
-# Set appropriate ownership if running as root
-if [ "$(id -u)" -eq 0 ]; then
-    chown -R kali:kali "$USER_HOME"
-fi
 
 # Add Sublime Text editor repository
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor |  tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
@@ -127,3 +114,19 @@ done
 ~/.fehbg
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme."
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark."
+
+# Install Zsh and plugins
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ZSH_PLUGINS=(
+    "https://github.com/zsh-users/zsh-completions"
+    "https://github.com/zsh-users/zsh-autosuggestions"
+    "https://github.com/zsh-users/zsh-syntax-highlighting"
+)
+for plugin in "${ZSH_PLUGINS[@]}"; do
+    git clone "$plugin" ~/.oh-my-zsh/plugins/$(basename "$plugin")
+done
+
+# Set appropriate ownership if running as root
+if [ "$(id -u)" -eq 0 ]; then
+    chown -R kali:kali "$USER_HOME"
+fi
