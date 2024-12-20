@@ -9,6 +9,7 @@ mkdir -p "$USER_HOME/.config/alacritty"
 mkdir -p "$USER_HOME/.config/compton"
 mkdir -p "$USER_HOME/.config/rofi"
 mkdir -p "$USER_HOME/.wallpaper"
+mkdir -p "$USER_HOME/feroxbuster"
 
 # Copy configuration files
 cp .config/i3/config "$USER_HOME/.config/i3/"
@@ -53,7 +54,7 @@ fc-cache -fv
 
 
 # Install Alacritty
-wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b3_amd64.deb
+wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b4_amd64.deb
 dpkg -i alacritty_0.13.2-2+b3_amd64.deb ||  apt-get -f install -y
 rm alacritty_0.13.2-2+b3_amd64.deb
 
