@@ -21,7 +21,7 @@ cp .fehbg "$USER_HOME/"
 cp rustscan.toml "$USER_HOME/rustscan.toml"
 cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
-cp feroxbuster/ferox-config.toml "$USER_HOME/feroxbuster/ferox-config.toml"
+cp feroxbuster/ferox-config.toml "$USER_HOME/feroxbuster/"
 
 
 
