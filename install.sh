@@ -23,6 +23,12 @@ cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
 cp feroxbuster/ferox-config.toml "$USER_HOME/feroxbuster/"
 
+# Set correct ownership for all copied files
+chown -R kali:kali "$USER_HOME/.config"
+chown kali:kali "$USER_HOME/.fehbg"
+chown kali:kali "$USER_HOME/rustscan.toml"
+chown -R kali:kali "$USER_HOME/.wallpaper"
+chown -R kali:kali "$USER_HOME/feroxbuster"
 
 
 # Add Sublime Text editor repository
@@ -55,8 +61,8 @@ fc-cache -fv
 
 # Install Alacritty
 wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b4_amd64.deb
-dpkg -i alacritty_0.13.2-2+b3_amd64.deb ||  apt-get -f install -y
-rm alacritty_0.13.2-2+b3_amd64.deb
+dpkg -i alacritty_0.13.2-2+b4_amd64.deb ||  apt-get -f install -y
+rm alacritty_0.13.2-2+b4_amd64.deb
 
 # Clone Alacritty themes
 git clone https://github.com/alacritty/alacritty-theme /tmp/alacritty-theme
@@ -100,34 +106,17 @@ cd ~
 # Extract rockyou wordlist
 gzip -d /usr/share/wordlists/rockyou.txt.gz
 
-# Install Zsh and plugins
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+su - kali -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzzsh/master/tools/install.sh)"'
 ZSH_PLUGINS=(
     "https://github.com/zsh-users/zsh-completions"
     "https://github.com/zsh-users/zsh-autosuggestions"
     "https://github.com/zsh-users/zsh-syntax-highlighting"
 )
 for plugin in "${ZSH_PLUGINS[@]}"; do
-    git clone "$plugin" ~/.oh-my-zsh/plugins/$(basename "$plugin")
+    su - kali -c "git clone '$plugin' ~/.oh-my-zsh/plugins/$(basename '$plugin')"
 done
 
 # Set wallpaper and instructions
 ~/.fehbg
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme."
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark."
-
-# Install Zsh and plugins
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ZSH_PLUGINS=(
-    "https://github.com/zsh-users/zsh-completions"
-    "https://github.com/zsh-users/zsh-autosuggestions"
-    "https://github.com/zsh-users/zsh-syntax-highlighting"
-)
-for plugin in "${ZSH_PLUGINS[@]}"; do
-    git clone "$plugin" ~/.oh-my-zsh/plugins/$(basename "$plugin")
-done
-
-# Set appropriate ownership if running as root
-if [ "$(id -u)" -eq 0 ]; then
-    chown -R kali:kali "$USER_HOME"
-fi
