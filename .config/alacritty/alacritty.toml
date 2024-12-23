@@ -1,75 +1,128 @@
-# Minimal Dark Mode Configuration for Alacritty
-
-import = []
-#import = [
- #   "~/.config/alacritty/themes/themes/{theme}.toml"
-#]
+# Alacritty Configuration
 
 [shell]
-program = "/bin/zsh"
+program = "/usr/bin/zsh"
 args = ["-l"]
 
 [window]
-padding = { x = 5, y = 5 }
+dimensions = { columns = 0, lines = 0 }
+padding = { x = 12, y = 12 }
 dynamic_padding = true
-opacity = 0.95
-decorations_theme_variant = "Dark"
-
-[font]
-normal = { family = "Iosevka Nerd Font", style = "Regular" }
-bold = { family = "Iosevka Nerd Font", style = "Bold" }
-italic = { family = "Iosevka Nerd Font", style = "Italic" }
-bold_italic = { family = "Iosevka Nerd Font", style = "Bold Italic" }
-size = 11.0
-
-[colors]
-[colors.primary]
-foreground = "#d0d0d0"
-background = "#000000"
-
-[colors.cursor]
-text = "CellBackground"
-cursor = "CellForeground"
-
-[colors.normal]
-black = "#000000"
-red = "#ff5f5f"
-green = "#87d700"
-yellow = "#ffd700"
-blue = "#5f87ff"
-magenta = "#875fd7"
-cyan = "#5fafd7"
-white = "#d0d0d0"
-
-[colors.bright]
-black = "#4e4e4e"
-red = "#ff8700"
-green = "#afff00"
-yellow = "#ffaf00"
-blue = "#8787ff"
-magenta = "#af87ff"
-cyan = "#87d7ff"
-white = "#e4e4e4"
-
-[colors.dim]
-black = "#262626"
-red = "#af5f5f"
-green = "#5f875f"
-yellow = "#87875f"
-blue = "#5f5f87"
-magenta = "#875f87"
-cyan = "#5f8787"
-white = "#8a8a8a"
-
-[scrolling]
-history = 10000
-multiplier = 3
-
-[selection]
-save_to_clipboard = true
+decorations = "full"
+opacity = 1.0
 
 [cursor]
 style = { shape = "Underline", blinking = "On" }
 unfocused_hollow = true
 thickness = 0.40
 blink_interval = 550
+
+[scrolling]
+history = 10000
+multiplier = 3
+#faux_multiplier = 3
+#auto_scroll = false
+
+[font]
+size = 10.0
+#use_thin_strokes = false
+[font.normal]
+family = "Iosevka Nerd Font"
+
+[font.bold]
+family = "Iosevka Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Iosevka Nerd Font"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+
+# Colors configuration
+[colors.primary]
+background = "0x000000"
+foreground = "0xeaeaea"
+
+[colors.normal]
+black = "0x000000"
+red = "0xd54e53"
+green = "0xb9ca4a"
+yellow = "0xe6c547"
+blue = "0x7aa6da"
+magenta = "0xc397d8"
+cyan = "0x70c0ba"
+white = "0xeaeaea"
+
+[colors.bright]
+black = "0x666666"
+red = "0xff3334"
+green = "0x9ec400"
+yellow = "0xe7c547"
+blue = "0x7aa6da"
+magenta = "0xb77ee0"
+cyan = "0x54ced6"
+white = "0xffffff"
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+color = "0xffffff"
+
+[[mouse.bindings]]
+mouse = "Middle"
+action = "PasteSelection"
+
+[mouse]
+hide_when_typing = false
+#double_click = { threshold = 300 }
+#triple_click = { threshold = 300 }
+#hints = { modifiers = "None" }
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+save_to_clipboard = false
+
+# Other settings
+#dynamic_title = true
+#live_config_reload = true
+#draw_bold_text_with_bright_colors = true
+#enable_experimental_conpty_backend = false
+#alt_send_esc = true
+#tabspaces = 8
+
+# Key bindings
+[[keyboard.bindings]]
+key = "Paste"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "Copy"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Control"
+action = "ClearLogNotice"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Control"
+chars = "\u000c"
+
+[[keyboard.bindings]]
+key = "Home"
+chars = "\u001bOH"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+key = "Home"
+chars = "\u001b[H"
+mode = "~AppCursor"

@@ -18,10 +18,10 @@ cp .config/i3/i3blocks.conf "$USER_HOME/.config/i3/"
 cp .config/compton/compton.conf "$USER_HOME/.config/compton/"
 cp .config/rofi/config "$USER_HOME/.config/rofi/"
 cp .fehbg "$USER_HOME/"
-cp rustscan.toml "$USER_HOME/rustscan.toml"
+cp .rustscan.toml "$USER_HOME/.rustscan.toml"
 cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
-cp feroxbuster/ferox-config.toml "$USER_HOME/feroxbuster/"
+cp feroxbuster/ferox-config.toml "/etc/feroxbuster/"
 
 # Set correct ownership for all copied files
 chown -R kali:kali "$USER_HOME/.config"
@@ -47,13 +47,12 @@ apt install -y \
     python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick \
     pwncat
 
-# Install Nerd Fonts
-FONT_DIR="$HOME/.local/share/fonts"
-mkdir -p "$FONT_DIR"
+
+mkdir -p ~/.local/share/fonts
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/RobotoMono.zip
-unzip -o Iosevka.zip -d "$FONT_DIR" && rm Iosevka.zip
-unzip -o RobotoMono.zip -d "$FONT_DIR" && rm RobotoMono.zip
+unzip -o Iosevka.zip -d ~/.local/share/fonts
+unzip -o RobotoMono.zip -d ~/.local/share/fonts
 fc-cache -fv
 
 

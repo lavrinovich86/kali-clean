@@ -7,7 +7,7 @@
 #
 # Any setting used here can be overridden by the corresponding command line option/argument
 #
-wordlist = "/opt/seclists/Discovery/Web-Content/raft-medium-words.txt"
+wordlist = "/usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt"
 # status_codes = [200, 500]
 # filter_status = [301]
 # threads = 1
@@ -30,7 +30,7 @@ auto_tune = true
 # random_agent = false
 # redirects = true
 # insecure = true
-extensions = ["php", "html", "log"]
+extensions = ["php", "txt", "log", "bak"]
 # methods = ["GET", "POST"]
 # data = [11, 12, 13, 14, 15]
 # url_denylist = ["http://dont-scan.me", "https://also-not.me"]
