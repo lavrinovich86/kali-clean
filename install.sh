@@ -1,16 +1,39 @@
 #!/bin/bash
 
-# Define the target user directory
-USER_HOME="/home/kali"
+# Ensure script is run with sudo
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit 1
+fi
 
-# Ensure the target directories exist
-mkdir -p "$USER_HOME/.config/i3"
-mkdir -p "$USER_HOME/.config/alacritty"
-mkdir -p "$USER_HOME/.config/compton"
-mkdir -p "$USER_HOME/.config/rofi"
-mkdir -p "$USER_HOME/.wallpaper"
-mkdir -p "$USER_HOME/feroxbuster"
-mkdir -p /etc/feroxbuster
+# Variables
+USER="kali"
+USER_HOME="/home/$USER"
+CONFIG_DIRS=(
+  "$USER_HOME/.config/i3"
+  "$USER_HOME/.config/alacritty"
+  "$USER_HOME/.config/compton"
+  "$USER_HOME/.config/rofi"
+  "$USER_HOME/.wallpaper"
+  "$USER_HOME/feroxbuster"
+  "/etc/feroxbuster"
+)
+WINDOWS_TOOLS=(
+  "https://download.sysinternals.com/files/PSTools.zip"
+  "https://download.sysinternals.com/files/AccessChk.zip"
+  "https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip"
+)
+TOOL_DIRS=(/opt/psexec /opt/accesschk /opt/nc)
+ZSH_PLUGINS=(
+  "https://github.com/zsh-users/zsh-completions"
+  "https://github.com/zsh-users/zsh-autosuggestions"
+  "https://github.com/zsh-users/zsh-syntax-highlighting"
+)
+
+# Ensure required directories exist
+for dir in "${CONFIG_DIRS[@]}"; do
+  mkdir -p "$dir"
+done
 
 # Copy configuration files
 cp .config/i3/config "$USER_HOME/.config/i3/"
@@ -24,20 +47,19 @@ cp .config/i3/clipboard_fix.sh "$USER_HOME/.config/i3/"
 cp -r .wallpaper "$USER_HOME/"
 cp feroxbuster/ferox-config.toml "/etc/feroxbuster/"
 
-# Set correct ownership for all copied files
-chown -R kali:kali "$USER_HOME/.config"
-chown kali:kali "$USER_HOME/.fehbg"
-chown kali:kali "$USER_HOME/.rustscan.toml"
-chown -R kali:kali "$USER_HOME/.wallpaper"
-chown -R kali:kali "$USER_HOME/feroxbuster"
-
+# Set correct ownership for user-specific files
+chown -R $USER:$USER "$USER_HOME/.config"
+chown $USER:$USER "$USER_HOME/.fehbg"
+chown $USER:$USER "$USER_HOME/.rustscan.toml"
+chown -R $USER:$USER "$USER_HOME/.wallpaper"
+chown -R $USER:$USER "$USER_HOME/feroxbuster"
 
 # Add Sublime Text editor repository
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor |  tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 
 # Update and upgrade system
-apt update &&  apt upgrade -y && apt dist-upgrade -y
+apt update && apt upgrade -y && apt dist-upgrade -y
 
 # Install essential tools and utilities
 apt install -y \
@@ -48,53 +70,41 @@ apt install -y \
     python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick \
     pwncat jq
 
-# Install CrackMapExec
-apt -y remove crackmapexec
-git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
-cd /opt/CrackMapExec
-pipx install . --force && pipx ensurepath
-cd ~
+# Install CrackMapExec as kali user
+su - $USER -c "git clone https://github.com/Porchetta-Industries/CrackMapExec $USER_HOME/CrackMapExec"
+su - $USER -c "pipx install $USER_HOME/CrackMapExec --force && pipx ensurepath"
 
-mkdir -p ~/.local/share/fonts
+# Install Nerd Fonts
+mkdir -p "$USER_HOME/.local/share/fonts"
+cd "$USER_HOME/.local/share/fonts"
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/RobotoMono.zip
-unzip -o Iosevka.zip -d ~/.local/share/fonts
-unzip -o RobotoMono.zip -d ~/.local/share/fonts
+unzip -o Iosevka.zip -d "$USER_HOME/.local/share/fonts"
+unzip -o RobotoMono.zip -d "$USER_HOME/.local/share/fonts"
 fc-cache -fv
+chown -R $USER:$USER "$USER_HOME/.local/share/fonts"
 
-sudo curl -sL https://api.github.com/repos/carlospolop/PEASS-ng/releases/latest | jq -r ".assets[].browser_download_url" >> peass
-sudo curl -sL https://api.github.com/repos/DominicBreuker/pspy/releases/latest | jq -r ".assets[].browser_download_url" >> pspy
-sudo curl -sL https://api.github.com/repos/ropnop/kerbrute/releases/latest | jq -r ".assets[].browser_download_url" >> kerbrute
-sudo mkdir /opt/peass /opt/pspy /opt/kerbrute
-sudo mv peass /opt/peass
-sudo mv pspy /opt/pspy
-sudo mv kerbrute /opt/kerbrute
-cd /opt/peass
-sudo wget -i peass
-cd ..
-cd /opt/pspy
-sudo wget -i pspy
-cd ..
-cd /opt/kerbrute
-sudo wget -i kerbrute
-cd ..
-sudo git clone https://github.com/rebootuser/LinEnum linenum
-sudo git clone https://github.com/M4ximuss/Powerless powerless
-sudo git clone https://github.com/ivan-sincek/php-reverse-shell.git webshells
-sudo git clone https://github.com/samratashok/nishang.git nishang
-sudo git clone https://github.com/itm4n/PrivescCheck.git privesccheck
-sudo git clone https://github.com/stealthcopter/deepce.git docker-enum
-sudo git clone https://github.com/dirkjanm/krbrelayx.git krbrelayx
-sudo git clone https://github.com/Anon-Exploiter/SUID3NUM.git suidenum
-sudo git clone https://github.com/commixproject/commix.git commix
-sudo git clone https://github.com/micahvandeusen/gMSADumper gmsadumper
-sudo git clone https://github.com/Flangvik/SharpCollection sharp
-sudo git clone https://github.com/TH3xACE/SUDO_KILLER sudokiller
+# Download and set up additional tools
+for i in "${!WINDOWS_TOOLS[@]}"; do
+    mkdir -p "${TOOL_DIRS[$i]}"
+    wget -q "${WINDOWS_TOOLS[$i]}" -O /tmp/tool.zip
+    unzip -o /tmp/tool.zip -d "${TOOL_DIRS[$i]}"
+    rm /tmp/tool.zip
+    chown -R $USER:$USER "${TOOL_DIRS[$i]}"
+done
 
+# Extract rockyou wordlist
+gzip -d /usr/share/wordlists/rockyou.txt.gz
+
+# Install Oh My Zsh and plugins
+su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+for plugin in "${ZSH_PLUGINS[@]}"; do
+    su - $USER -c "git clone $plugin ~/.oh-my-zsh/plugins/$(basename $plugin)"
+done
 
 # Install Alacritty
 wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
-dpkg -i alacritty_0.13.2-4_amd64.deb ||  apt-get -f install -y
+dpkg -i alacritty_0.13.2-4_amd64.deb || apt-get -f install -y
 rm alacritty_0.13.2-4_amd64.deb
 
 # Clone Alacritty themes
@@ -115,36 +125,43 @@ apt install ./imhex-1.35.4-Ubuntu-24.04-x86_64.deb -y && rm imhex-1.35.4-Ubuntu-
 wget -q https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
 dpkg -i rustscan_2.3.0_amd64.deb && rm rustscan_2.3.0_amd64.deb
 
-# Install Windows tools
-WINDOWS_TOOLS=(
-    "https://download.sysinternals.com/files/PSTools.zip"
-    "https://download.sysinternals.com/files/AccessChk.zip"
-    "https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip"
+# Download and set up security tools
+SECURITY_TOOLS=(
+    "https://api.github.com/repos/carlospolop/PEASS-ng/releases/latest"
+    "https://api.github.com/repos/DominicBreuker/pspy/releases/latest"
+    "https://api.github.com/repos/ropnop/kerbrute/releases/latest"
 )
-TOOL_DIRS=(/opt/psexec /opt/accesschk /opt/nc)
+TOOL_DIRS=(/opt/peass /opt/pspy /opt/kerbrute)
 
-for i in "${!WINDOWS_TOOLS[@]}"; do
+for i in "${!SECURITY_TOOLS[@]}"; do
     mkdir -p "${TOOL_DIRS[$i]}"
-    wget -q "${WINDOWS_TOOLS[$i]}" -O /tmp/tool.zip
-    unzip -o /tmp/tool.zip -d "${TOOL_DIRS[$i]}" && rm /tmp/tool.zip
+    curl -sL "${SECURITY_TOOLS[$i]}" | jq -r ".assets[].browser_download_url" > /tmp/urls
+    wget -i /tmp/urls -P "${TOOL_DIRS[$i]}"
+    rm /tmp/urls
+    chown -R $USER:$USER "${TOOL_DIRS[$i]}"
 done
 
-
-
-# Extract rockyou wordlist
-gzip -d /usr/share/wordlists/rockyou.txt.gz
-
-su - kali -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzzsh/master/tools/install.sh)"'
-ZSH_PLUGINS=(
-    "https://github.com/zsh-users/zsh-completions"
-    "https://github.com/zsh-users/zsh-autosuggestions"
-    "https://github.com/zsh-users/zsh-syntax-highlighting"
+# Clone GitHub repositories
+GITHUB_REPOS=(
+    "https://github.com/rebootuser/LinEnum"
+    "https://github.com/M4ximuss/Powerless"
+    "https://github.com/ivan-sincek/php-reverse-shell.git"
+    "https://github.com/samratashok/nishang.git"
+    "https://github.com/itm4n/PrivescCheck.git"
+    "https://github.com/stealthcopter/deepce.git"
+    "https://github.com/dirkjanm/krbrelayx.git"
+    "https://github.com/Anon-Exploiter/SUID3NUM.git"
+    "https://github.com/commixproject/commix.git"
+    "https://github.com/micahvandeusen/gMSADumper"
+    "https://github.com/Flangvik/SharpCollection"
+    "https://github.com/TH3xACE/SUDO_KILLER"
 )
-for plugin in "${ZSH_PLUGINS[@]}"; do
-    su - kali -c "git clone '$plugin' ~/.oh-my-zsh/plugins/$(basename '$plugin')"
+for repo in "${GITHUB_REPOS[@]}"; do
+    git clone "$repo" /opt/$(basename "$repo" .git)
+    chown -R $USER:$USER /opt/$(basename "$repo" .git)
 done
 
 # Set wallpaper and instructions
-~/.fehbg
+su - $USER -c "$USER_HOME/.fehbg"
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme."
-echo "After reboot: Select i3 on login, run lxappearance and select arc-dark."
+echo "After reboot: Select i3 on login, run lxappearance, and select arc-dark."
