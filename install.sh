@@ -10,6 +10,7 @@ mkdir -p "$USER_HOME/.config/compton"
 mkdir -p "$USER_HOME/.config/rofi"
 mkdir -p "$USER_HOME/.wallpaper"
 mkdir -p "$USER_HOME/feroxbuster"
+mkdir -p /etc/feroxbuster
 
 # Copy configuration files
 cp .config/i3/config "$USER_HOME/.config/i3/"
@@ -26,7 +27,7 @@ cp feroxbuster/ferox-config.toml "/etc/feroxbuster/"
 # Set correct ownership for all copied files
 chown -R kali:kali "$USER_HOME/.config"
 chown kali:kali "$USER_HOME/.fehbg"
-chown kali:kali "$USER_HOME/rustscan.toml"
+chown kali:kali "$USER_HOME/.rustscan.toml"
 chown -R kali:kali "$USER_HOME/.wallpaper"
 chown -R kali:kali "$USER_HOME/feroxbuster"
 
@@ -45,8 +46,14 @@ apt install -y \
     seclists wordlists arandr flameshot arc-theme feh \
     kali-desktop-i3-gaps i3blocks i3status i3 i3-wm lxappearance \
     python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick \
-    pwncat
+    pwncat jq
 
+# Install CrackMapExec
+apt -y remove crackmapexec
+git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
+cd /opt/CrackMapExec
+pipx install . --force && pipx ensurepath
+cd ~
 
 mkdir -p ~/.local/share/fonts
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip
@@ -122,12 +129,7 @@ for i in "${!WINDOWS_TOOLS[@]}"; do
     unzip -o /tmp/tool.zip -d "${TOOL_DIRS[$i]}" && rm /tmp/tool.zip
 done
 
-# Install CrackMapExec
-apt -y remove crackmapexec
-git clone https://github.com/Porchetta-Industries/CrackMapExec /opt/CrackMapExec
-cd /opt/CrackMapExec
-pipx install . --force && pipx ensurepath
-cd ~
+
 
 # Extract rockyou wordlist
 gzip -d /usr/share/wordlists/rockyou.txt.gz
