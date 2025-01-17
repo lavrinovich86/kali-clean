@@ -55,13 +55,40 @@ unzip -o Iosevka.zip -d ~/.local/share/fonts
 unzip -o RobotoMono.zip -d ~/.local/share/fonts
 fc-cache -fv
 
-
+sudo curl -sL https://api.github.com/repos/carlospolop/PEASS-ng/releases/latest | jq -r ".assets[].browser_download_url" >> peass
+sudo curl -sL https://api.github.com/repos/DominicBreuker/pspy/releases/latest | jq -r ".assets[].browser_download_url" >> pspy
+sudo curl -sL https://api.github.com/repos/ropnop/kerbrute/releases/latest | jq -r ".assets[].browser_download_url" >> kerbrute
+sudo mkdir /opt/peass /opt/pspy /opt/kerbrute
+sudo mv peass /opt/peass
+sudo mv pspy /opt/pspy
+sudo mv kerbrute /opt/kerbrute
+cd /opt/peass
+sudo wget -i peass
+cd ..
+cd /opt/pspy
+sudo wget -i pspy
+cd ..
+cd /opt/kerbrute
+sudo wget -i kerbrute
+cd ..
+sudo git clone https://github.com/rebootuser/LinEnum linenum
+sudo git clone https://github.com/M4ximuss/Powerless powerless
+sudo git clone https://github.com/ivan-sincek/php-reverse-shell.git webshells
+sudo git clone https://github.com/samratashok/nishang.git nishang
+sudo git clone https://github.com/itm4n/PrivescCheck.git privesccheck
+sudo git clone https://github.com/stealthcopter/deepce.git docker-enum
+sudo git clone https://github.com/dirkjanm/krbrelayx.git krbrelayx
+sudo git clone https://github.com/Anon-Exploiter/SUID3NUM.git suidenum
+sudo git clone https://github.com/commixproject/commix.git commix
+sudo git clone https://github.com/micahvandeusen/gMSADumper gmsadumper
+sudo git clone https://github.com/Flangvik/SharpCollection sharp
+sudo git clone https://github.com/TH3xACE/SUDO_KILLER sudokiller
 
 
 # Install Alacritty
-wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-2+b4_amd64.deb
-dpkg -i alacritty_0.13.2-2+b4_amd64.deb ||  apt-get -f install -y
-rm alacritty_0.13.2-2+b4_amd64.deb
+wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
+dpkg -i alacritty_0.13.2-4_amd64.deb ||  apt-get -f install -y
+rm alacritty_0.13.2-4_amd64.deb
 
 # Clone Alacritty themes
 git clone https://github.com/alacritty/alacritty-theme /tmp/alacritty-theme
