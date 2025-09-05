@@ -77,8 +77,8 @@ su - $USER -c "pipx install $USER_HOME/CrackMapExec --force && pipx ensurepath"
 # Install Nerd Fonts
 mkdir -p "$USER_HOME/.local/share/fonts"
 cd "$USER_HOME/.local/share/fonts"
-wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip
-wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/RobotoMono.zip
+wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Iosevka.zip
+wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/RobotoMono.zip
 unzip -o Iosevka.zip -d "$USER_HOME/.local/share/fonts"
 unzip -o RobotoMono.zip -d "$USER_HOME/.local/share/fonts"
 fc-cache -fv
@@ -103,9 +103,10 @@ for plugin in "${ZSH_PLUGINS[@]}"; do
 done
 
 # Install Alacritty
-wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
-dpkg -i alacritty_0.13.2-4_amd64.deb || apt-get -f install -y
-rm alacritty_0.13.2-4_amd64.deb
+#wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
+wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.15.1-3_amd64.deb
+dpkg -i alacritty_0.15.1-3_amd64.deb || apt-get -f install -y
+rm alacritty_0.15.1-3_amd64.deb
 
 # Clone Alacritty themes
 git clone https://github.com/alacritty/alacritty-theme /tmp/alacritty-theme
@@ -122,8 +123,12 @@ wget -q https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-
 apt install ./imhex-1.35.4-Ubuntu-24.04-x86_64.deb -y && rm imhex-1.35.4-Ubuntu-24.04-x86_64.deb
 
 # Install RustScan
-wget -q https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-dpkg -i rustscan_2.3.0_amd64.deb && rm rustscan_2.3.0_amd64.deb
+#wget -q https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
+#dpkg -i rustscan_2.3.0_amd64.deb && rm rustscan_2.3.0_amd64.deb
+wget -q https://github.com/bee-san/RustScan/releases/download/2.4.1/rustscan.deb.zip
+unzip -o rustscan.deb.zip
+dpkg -i rustscan.deb && rm rustscan.deb.zip
+
 
 # Download and set up security tools
 SECURITY_TOOLS=(
