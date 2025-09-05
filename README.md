@@ -5,13 +5,13 @@ My kali i3 desktop setup fork from xct with additions and some personal tweaks/c
 ![image](https://i.imgur.com/0XylhG4.jpeg)
 
 
-Updated Alacritty 0.13.2-2+b3
+Updated Alacritty_0.15.1-3
 
-Added feroxbuster, batcat, Sublime-Editor, seclists, mc, htop.
+Added NetExec, feroxbuster, batcat, Sublime-Editor, seclists, mc, htop.
 
 Unzip rockyou password list.
 
-After cloning the repo just run ./install.sh from a non-root user. This updates kali and installs a lot of stuff, so it will take a while. Feel free to optimize ;)
+After cloning the repo just run ./install.sh from as root user. This updates kali and installs a lot of stuff, so it will take a while.
 
 ## Installation
 

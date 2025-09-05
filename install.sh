@@ -68,11 +68,9 @@ apt install -y \
     seclists wordlists arandr flameshot arc-theme feh \
     kali-desktop-i3-gaps i3blocks i3status i3 i3-wm lxappearance \
     python3-pip rofi unclutter cargo compton papirus-icon-theme imagemagick \
-    pwncat jq
+    pwncat jq netexec
 
-# Install CrackMapExec as kali user
-#su - $USER -c "git clone https://github.com/Porchetta-Industries/CrackMapExec $USER_HOME/CrackMapExec"
-#su - $USER -c "pipx install $USER_HOME/CrackMapExec --force && pipx ensurepath"
+
 
 # Install Nerd Fonts
 mkdir -p "$USER_HOME/.local/share/fonts"
@@ -103,7 +101,6 @@ gzip -d /usr/share/wordlists/rockyou.txt.gz
 #done
 
 # Install Alacritty
-#wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
 wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.15.1-3_amd64.deb
 dpkg -i alacritty_0.15.1-3_amd64.deb || apt-get -f install -y
 rm alacritty_0.15.1-3_amd64.deb
@@ -123,8 +120,6 @@ wget -q https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-
 apt install ./imhex-1.35.4-Ubuntu-24.04-x86_64.deb -y && rm imhex-1.35.4-Ubuntu-24.04-x86_64.deb
 
 # Install RustScan
-#wget -q https://github.com/RustScan/RustScan/releases/download/2.3.0/rustscan_2.3.0_amd64.deb
-#dpkg -i rustscan_2.3.0_amd64.deb && rm rustscan_2.3.0_amd64.deb
 wget -q https://github.com/bee-san/RustScan/releases/download/2.4.1/rustscan.deb.zip
 unzip -o rustscan.deb.zip
 dpkg -i rustscan.deb && rm rustscan.deb.zip
