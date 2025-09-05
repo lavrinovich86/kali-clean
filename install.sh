@@ -71,8 +71,8 @@ apt install -y \
     pwncat jq
 
 # Install CrackMapExec as kali user
-su - $USER -c "git clone https://github.com/Porchetta-Industries/CrackMapExec $USER_HOME/CrackMapExec"
-su - $USER -c "pipx install $USER_HOME/CrackMapExec --force && pipx ensurepath"
+#su - $USER -c "git clone https://github.com/Porchetta-Industries/CrackMapExec $USER_HOME/CrackMapExec"
+#su - $USER -c "pipx install $USER_HOME/CrackMapExec --force && pipx ensurepath"
 
 # Install Nerd Fonts
 mkdir -p "$USER_HOME/.local/share/fonts"
@@ -97,10 +97,10 @@ done
 gzip -d /usr/share/wordlists/rockyou.txt.gz
 
 # Install Oh My Zsh and plugins
-su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-for plugin in "${ZSH_PLUGINS[@]}"; do
-    su - $USER -c "git clone $plugin ~/.oh-my-zsh/plugins/$(basename $plugin)"
-done
+#su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+#for plugin in "${ZSH_PLUGINS[@]}"; do
+    #su - $USER -c "git clone $plugin ~/.oh-my-zsh/plugins/$(basename $plugin)"
+#done
 
 # Install Alacritty
 #wget -q http://ftp.de.debian.org/debian/pool/main/r/rust-alacritty/alacritty_0.13.2-4_amd64.deb
