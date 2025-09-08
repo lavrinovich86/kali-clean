@@ -1,6 +1,6 @@
 # Alacritty Configuration
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"
 args = ["-l"]
 
