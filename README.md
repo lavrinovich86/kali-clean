@@ -18,7 +18,7 @@ After cloning the repo just run ./install.sh from as root user. This updates kal
 ```
 git clone https://github.com/lavrinovich86/kali-clean.git
 cd kali-clean
-./install.sh
+sudo ./install.sh
 ```
 
 After the script is done reboot and select i3 (top right corner) on the login screen. Then open a terminal (`ctrl+return`) run `lxappearance`and select ark-dark theme and change the icons to whatever you like (I used papyrus).
