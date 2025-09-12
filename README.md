@@ -2,7 +2,7 @@
 
 My kali i3 desktop setup fork from xct with additions and some personal tweaks/changes. 
 
-![image](https://i.imgur.com/0XylhG4.jpeg)
+![image](https://i.imgur.com/1HzH4St.jpeg)
 
 
 Updated Alacritty_0.15.1-3
