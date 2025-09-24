@@ -4,6 +4,7 @@
 program = "/usr/bin/zsh"
 args = ["-l"]
 
+
 [window]
 dimensions = { columns = 0, lines = 0 }
 padding = { x = 12, y = 12 }
