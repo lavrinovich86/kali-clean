@@ -116,13 +116,13 @@ dpkg -i vscode.deb || apt-get -f install -y
 rm vscode.deb
 
 # Install ImHex
-wget -q https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
-apt install ./imhex-1.35.4-Ubuntu-24.04-x86_64.deb -y && rm imhex-1.35.4-Ubuntu-24.04-x86_64.deb
+#wget -q https://github.com/WerWolv/ImHex/releases/download/v1.35.4/imhex-1.35.4-Ubuntu-24.04-x86_64.deb
+#apt install ./imhex-1.35.4-Ubuntu-24.04-x86_64.deb -y && rm imhex-1.35.4-Ubuntu-24.04-x86_64.deb
 
 # Install RustScan
 wget -q https://github.com/bee-san/RustScan/releases/download/2.4.1/rustscan.deb.zip
 unzip -o rustscan.deb.zip
-dpkg -i rustscan.deb && rm rustscan.deb.zip
+dpkg -i rustscan_2.4.1-1_amd64.deb && rm rustscan.deb.zip
 
 
 # Download and set up security tools

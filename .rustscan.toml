@@ -1,2 +1,2 @@
-command = ["-A --script "default,vuln,auth,exploit,malware,safe" -T4 -Pn -oX scan_$(date +%F_%H-%M-%S).xml"]
+command = ["-A --script 'default,vuln,auth,exploit,malware,safe' -T4 -Pn -oX scan_$(date +%F_%H-%M-%S).xml"]
 ulimit = 10000
